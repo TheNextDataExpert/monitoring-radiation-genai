@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Monitoring Radiasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0f172a; /* bg-slate-900 */
+            --secondary-color: #1e293b; /* bg-slate-800 */
+            --accent-color: #a3e635; /* lime-400 */
+            --accent-color-dark: #65a30d; /* lime-600 */
+            --text-color: #e2e8f0; /* slate-200 */
+            --border-color: #334155; /* slate-700 */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            animation: scanlines 0.2s infinite linear;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to right, transparent, var(--accent-color), transparent),
+                linear-gradient(to bottom, transparent, var(--accent-color), transparent);
+            animation: scanner 7.5s infinite linear;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @keyframes scanlines {
+            from { background-position: 0 0; }
+            to { background-position: 0 100%; }
+        }
+        
+        @keyframes scanner {
+            0% { transform: translate(0, -100vh); }
+            50% { transform: translate(0, 100vh); }
+            100% { transform: translate(0, -100vh); }
+        }
+
+        .font-display {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .text-glow {
+            color: var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color), 0 0 20px var(--accent-color-dark);
+        }
+
+        .card {
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(163, 230, 53, 0.1);
+        }
+
+        .form-input {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(163, 230, 53, 0.2);
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color-dark);
+            color: var(--primary-color);
+            font-weight: bold;
+            border-color: var(--accent-color);
+        }
+        
+        .btn-primary:hover {
+             background-color: var(--accent-color);
+             box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .radiation-symbol {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: repeating-conic-gradient(#000 0% 15%, #FDD835 15% 30%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: spin 4s linear infinite;
+        }
+        .radiation-symbol::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #000;
+            border-radius: 50%;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <main class="w-full max-w-5xl mx-auto z-10">
+
+        <section id="page1" class="space-y-8 fade-in">
+            <div class="text-center">
+                <div class="radiation-symbol"></div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-glow mb-2">SISTEM PENCATATAN RADIASI</h1>
+                <p class="text-lg text-slate-400">Aplikasi pencatatan data paparan radiasi untuk pekerja.</p>
+            </div>
+
+            <div class="card p-8 rounded-2xl">
+                <h2 class="text-2xl font-semibold text-white mb-4">Pencatatan Data Radiasi Kr-85</h2>
+                <p class="text-slate-400 leading-relaxed">
+                    Aplikasi ini digunakan oleh pekerja radiasi untuk mencatat hasil pengukuran paparan dari sumber radiasi Krypton-85 (Kr-85). Data yang diinput akan langsung tersimpan secara online di Google Sheets.
+                </p>
+            </div>
+
+            <div class="text-center">
+                <button onclick="showPage('pageLogin')" class="btn btn-primary py-4 px-10 rounded-lg shadow-lg text-xl">
+                    Mulai Input Data
+                </button>
+            </div>
+        </section>
+
+        <section id="pageLogin" class="hidden">
+            <div class="card p-8 rounded-2xl max-w-md mx-auto">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6 text-center">OPERATOR LOGIN</h2>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Masukkan username" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Masukkan password" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <p id="login-error" class="text-sm text-red-400"></p>
+                        <button type="submit" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg">
+                            Login
+                        </button>
+                    </div>
+                </form>
+                 <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page2" class="hidden">
+            <div class="card p-8 rounded-2xl">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6">FORMULIR PENCATATAN</h2>
+                
+                <form id="radiation-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label for="tanggal" class="block text-sm font-medium text-slate-300 mb-2">Tanggal</label>
+                            <input type="date" id="tanggal" name="tanggal" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="jam" class="block text-sm font-medium text-slate-300 mb-2">Jam Pencatatan</label>
+                            <select id="jam" name="jam" class="w-full p-2.5 rounded-lg form-input" required>
+                                <option value="08:00">08:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="20:00">20:00</option>
+                                <option value="22:00">22:00</option>
+                                <option value="00:00">00:00</option>
+                                <option value="02:00">02:00</option>
+                                <option value="04:00">04:00</option>
+                                <option value="06:00">06:00</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="nama" class="block text-sm font-medium text-slate-300 mb-2">Nama Pekerja</label>
+                            <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="area" class="block text-sm font-medium text-slate-300 mb-2">Area</label>
+                            <select id="area" name="area" class="w-full p-2.5 rounded-lg form-input" required>
+                                <option value="Casting PET">Casting PET</option>
+                                <option value="Casting N-2">Casting N-2</option>
+                                <option value="Take Up PET">Take Up PET</option>
+                                <option value="Take Up N-2">Take Up N-2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <fieldset class="border border-slate-700 p-4 rounded-lg">
+                        <legend class="px-2 text-lg font-semibold text-slate-200">Hasil Pengukuran (µSv/h)</legend>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                            <div>
+                                <label for="jarak1m" class="block text-sm font-medium text-slate-300 mb-2">Jarak 1 Meter</label>
+                                <input type="number" step="0.01" id="jarak1m" name="jarak1m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input" required>
+                            </div>
+                            <div>
+                                <label for="jarak5m" class="block text-sm font-medium text-slate-300 mb-2">Jarak 5 Meter</label>
+                                <input type="number" step="0.01" id="jarak5m" name="jarak5m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input" required>
+                            </div>
+                             <div>
+                                <label for="sekitar" class="block text-sm font-medium text-slate-300 mb-2">Area Sekitar</label>
+                                <input type="number" step="0.01" id="sekitar" name="sekitar" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input" required>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="flex items-center justify-end space-x-4 pt-2">
+                        <p id="status-message" class="text-sm"></p>
+                        <button id="submit-button" type="submit" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg">
+                            Simpan Data
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script>
+        const page1 = document.getElementById('page1');
+        const pageLogin = document.getElementById('pageLogin');
+        const page2 = document.getElementById('page2');
+        
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+
+        const radiationForm = document.getElementById('radiation-form');
+        const tanggalInput = document.getElementById('tanggal');
+        const submitButton = document.getElementById('submit-button');
+        const statusMessage = document.getElementById('status-message');
+
+        const allPages = [page1, pageLogin, page2];
+
+        function showPage(pageId) {
+            allPages.forEach(page => {
+                if (page.id === pageId) {
+                    page.classList.remove('hidden');
+                    page.classList.add('fade-in');
+                } else {
+                    page.classList.add('hidden');
+                }
+            });
+            
+            if (pageId === 'page2') {
+                tanggalInput.value = new Date().toISOString().split('T')[0];
+            }
+        }
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === USERNAME && password === PASSWORD) {
+                showPage('page2');
+                loginError.textContent = '';
+                loginForm.reset();
+            } else {
+                loginError.textContent = 'Username atau password salah.';
+            }
+        });
+
+        radiationForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (SCRIPT_URL === 'PASTE_URL_ANDA_DI_SINI' || !SCRIPT_URL) {
+                statusMessage.textContent = 'Error: URL Google Script belum diatur!';
+                statusMessage.className = 'text-sm text-red-400';
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Menyimpan...';
+            statusMessage.textContent = '';
+
+            const formData = new FormData(radiationForm);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    statusMessage.textContent = 'Data berhasil disimpan!';
+                    statusMessage.className = 'text-sm text-lime-400';
+                    radiationForm.reset();
+                    tanggalInput.value = new Date().toISOString().split('T')[0];
+                } else {
+                    throw new Error(data.message || 'Terjadi kesalahan yang tidak diketahui.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusMessage.textContent = 'Gagal menyimpan data. Cek konsol.';
+                statusMessage.className = 'text-sm text-red-400';
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Simpan Data';
+                setTimeout(() => { statusMessage.textContent = ''; }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
