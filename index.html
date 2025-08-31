@@ -377,13 +377,30 @@
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const debugInfo = document.createElement('div');
-        debugInfo.style.cssText = 'position:fixed; top:0; left:0; background:white; color:black; padding:5px; font-size:10px; z-index:9999;';
-        try {
-            debugInfo.innerHTML = `DEBUG:<br>Username: '${USERNAME}'<br>Password: '${PASSWORD}'`;
-        } catch (e) {
-            debugInfo.innerHTML = 'DEBUG: config.js variables not loaded!';
+        debugInfo.style.cssText = 'position:fixed; top:0; left:0; background:white; color:black; padding:5px; font-size:10px; z-index:9999; border: 1px solid red;';
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        function updateDebugInfo() {
+            const u_input = usernameInput.value;
+            const p_input = passwordInput.value;
+            try {
+                const u_match = u_input === USERNAME;
+                const p_match = p_input === PASSWORD;
+                debugInfo.innerHTML = `<b>CONFIG:</b><br>Username: '${USERNAME}'<br>Password: '${PASSWORD}'<br><br><b>YOUR INPUT:</b><br>Username: '${u_input}' (Match: ${u_match})<br>Password: '${p_input}' (Match: ${p_match})`;
+            } catch (e) {
+                debugInfo.innerHTML = 'DEBUG: config.js variables not loaded!';
+            }
         }
+
+        if (usernameInput && passwordInput) {
+            usernameInput.addEventListener('input', updateDebugInfo);
+            passwordInput.addEventListener('input', updateDebugInfo);
+        }
+
         document.body.appendChild(debugInfo);
+        // Initial call needs to be delayed slightly to ensure page is rendered
+        setTimeout(updateDebugInfo, 100);
     });
     </script>
 </body>
