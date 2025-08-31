@@ -374,5 +374,17 @@
             });
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const debugInfo = document.createElement('div');
+        debugInfo.style.cssText = 'position:fixed; top:0; left:0; background:white; color:black; padding:5px; font-size:10px; z-index:9999;';
+        try {
+            debugInfo.innerHTML = `DEBUG:<br>Username: '${USERNAME}'<br>Password: '${PASSWORD}'`;
+        } catch (e) {
+            debugInfo.innerHTML = 'DEBUG: config.js variables not loaded!';
+        }
+        document.body.appendChild(debugInfo);
+    });
+    </script>
 </body>
 </html>
