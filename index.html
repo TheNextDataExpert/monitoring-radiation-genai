@@ -172,22 +172,28 @@
             </div>
 
             <div class="card p-8 rounded-2xl">
-                <h2 class="text-2xl font-semibold text-white mb-4">Pencatatan Data Radiasi Kr-85</h2>
+                <h2 class="text-2xl font-semibold text-white mb-4">Pencatatan Data Radiasi</h2>
                 <p class="text-slate-400 leading-relaxed">
-                    Aplikasi ini digunakan oleh pekerja radiasi untuk mencatat hasil pengukuran paparan dari sumber radiasi Krypton-85 (Kr-85). Data yang diinput akan langsung tersimpan secara online di Google Sheets.
+                    Aplikasi ini digunakan oleh pekerja radiasi untuk mencatat hasil pengukuran paparan dari sumber radiasi Krypton-85 (Kr-85), checklist penggunaan Thickness Gauge, dan pencatatan dosimeter personal. Data yang diinput akan langsung tersimpan secara online di Google Sheets.
                 </p>
             </div>
 
-            <div class="text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <button onclick="showPage('pageLogin')" class="btn btn-primary py-4 px-10 rounded-lg shadow-lg text-xl">
-                    Mulai Input Data
+                    Input Data Kr-85
+                </button>
+                <button onclick="showPage('pageLoginTg')" class="btn btn-secondary py-4 px-10 rounded-lg shadow-lg text-xl">
+                    Checklist Thickness Gauge
+                </button>
+                <button onclick="showPage('pageLoginPd')" class="btn btn-secondary py-4 px-10 rounded-lg shadow-lg text-xl">
+                    Pencatatan Personal Dosimeter
                 </button>
             </div>
         </section>
 
         <section id="pageLogin" class="hidden">
             <div class="card p-8 rounded-2xl max-w-md mx-auto">
-                <h2 class="font-display text-3xl font-bold text-glow mb-6 text-center">OPERATOR LOGIN</h2>
+                <h2 class="font-display text-3xl font-bold text-glow mb-6 text-center">LOGIN DATA Kr-85</h2>
                 <form id="login-form" class="space-y-6">
                     <div>
                         <label for="username" class="block text-sm font-medium text-slate-300 mb-2">Username</label>
@@ -212,9 +218,63 @@
             </div>
         </section>
 
+        <section id="pageLoginTg" class="hidden">
+            <div class="card p-8 rounded-2xl max-w-md mx-auto">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6 text-center">LOGIN CHECKLIST THICKNESS GAUGE</h2>
+                <form id="login-form-tg" class="space-y-6">
+                    <div>
+                        <label for="username-tg" class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+                        <input type="text" id="username-tg" name="username-tg" placeholder="Masukkan username" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div>
+                        <label for="password-tg" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                        <input type="password" id="password-tg" name="password-tg" placeholder="Masukkan password" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <p id="login-error-tg" class="text-sm text-red-400"></p>
+                        <button type="submit" id="login-button-tg" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>
+                            Login
+                        </button>
+                    </div>
+                </form>
+                 <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pageLoginPd" class="hidden">
+            <div class="card p-8 rounded-2xl max-w-md mx-auto">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6 text-center">LOGIN PERSONAL DOSIMETER</h2>
+                <form id="login-form-pd" class="space-y-6">
+                    <div>
+                        <label for="username-pd" class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+                        <input type="text" id="username-pd" name="username-pd" placeholder="Masukkan username" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div>
+                        <label for="password-pd" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                        <input type="password" id="password-pd" name="password-pd" placeholder="Masukkan password" class="w-full p-2.5 rounded-lg form-input" required>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <p id="login-error-pd" class="text-sm text-red-400"></p>
+                        <button type="submit" id="login-button-pd" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>
+                            Login
+                        </button>
+                    </div>
+                </form>
+                 <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <section id="page2" class="hidden">
             <div class="card p-8 rounded-2xl">
-                <h2 class="font-display text-3xl font-bold text-glow mb-6">FORMULIR PENCATATAN</h2>
+                <h2 class="font-display text-3xl font-bold text-glow mb-6">FORMULIR PENCATATAN Kr-85</h2>
                 
                 <form id="radiation-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -285,33 +345,297 @@
                 </div>
             </div>
         </section>
+
+        <section id="page4" class="hidden">
+            <div class="card p-8 rounded-2xl">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6">Checklist Menggunakan Thickness Gauge</h2>
+                <form id="thickness-gauge-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="tg_tanggal" class="block text-sm font-medium text-slate-300 mb-2">Tanggal Checklist</label>
+                            <input type="date" id="tg_tanggal" name="tg_tanggal" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="tg_nama" class="block text-sm font-medium text-slate-300 mb-2">Nama Pekerja</label>
+                            <input type="text" id="tg_nama" name="tg_nama" placeholder="Masukkan nama" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="tg_shift" class="block text-sm font-medium text-slate-300 mb-2">Shift</label>
+                            <select id="tg_shift" name="tg_shift" class="w-full p-2.5 rounded-lg form-input" required>
+                                <option value="Shift 1">Shift 1</option>
+                                <option value="Shift 2">Shift 2</option>
+                                <option value="Shift 3">Shift 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Sebelum menggunakan -->
+                    <fieldset class="border border-slate-700 p-4 rounded-lg">
+                        <legend class="px-2 text-lg font-semibold text-slate-200">1. Sebelum Menggunakan</legend>
+                        <div class="space-y-4 mt-2">
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">a. Persiapan personal radiasi (TLD, Pendose, Surveymeter)</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="persiapan_personal_sudah" name="persiapan_personal" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="persiapan_personal_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="persiapan_personal_belum" name="persiapan_personal" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="persiapan_personal_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">b. Mencatat personal dosimeter pada log book</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="catat_dosimeter_sudah" name="catat_dosimeter" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="catat_dosimeter_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="catat_dosimeter_belum" name="catat_dosimeter" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="catat_dosimeter_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">c. Menggunakan TLD dan pendose pada dada</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="gunakan_tld_sudah" name="gunakan_tld" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="gunakan_tld_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="gunakan_tld_belum" name="gunakan_tld" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="gunakan_tld_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="sebelum_1m" class="block text-sm font-medium text-slate-300">d. Mengukur paparan radiasi pada jarak 1 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="sebelum_1m" name="sebelum_1m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                            <div>
+                                <label for="sebelum_5m" class="block text-sm font-medium text-slate-300">e. Mengukur paparan radiasi pada jarak 5 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="sebelum_5m" name="sebelum_5m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Saat bekerja -->
+                    <fieldset class="border border-slate-700 p-4 rounded-lg">
+                        <legend class="px-2 text-lg font-semibold text-slate-200">2. Saat Bekerja</legend>
+                        <div class="space-y-4 mt-2">
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">a. Lakukan penyiaran (Thickness gauge ON) dengan indikasi lampu berwarna merah</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="penyiaran_on_sudah" name="penyiaran_on" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="penyiaran_on_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="penyiaran_on_belum" name="penyiaran_on" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="penyiaran_on_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="saat_1m" class="block text-sm font-medium text-slate-300">b. Mengukur paparan radiasi pada jarak 1 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="saat_1m" name="saat_1m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                            <div>
+                                <label for="saat_5m" class="block text-sm font-medium text-slate-300">c. Mengukur paparan radiasi pada jarak 5 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="saat_5m" name="saat_5m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">d. Melakukan pencatatan pengukuran paparan radiasi setiap 2 jam sekali</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="catat_2jam_sudah" name="catat_2jam" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="catat_2jam_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="catat_2jam_belum" name="catat_2jam" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="catat_2jam_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Setelah menggunakan -->
+                    <fieldset class="border border-slate-700 p-4 rounded-lg">
+                        <legend class="px-2 text-lg font-semibold text-slate-200">3. Setelah Menggunakan</legend>
+                        <div class="space-y-4 mt-2">
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">a. Matikan peralatan gauging</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="gauging_off_sudah" name="gauging_off" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="gauging_off_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="gauging_off_belum" name="gauging_off" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="gauging_off_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">b. Pastikan bahwa lampu indikasi berwarna hijau</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="lampu_hijau_sudah" name="lampu_hijau" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="lampu_hijau_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="lampu_hijau_belum" name="lampu_hijau" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="lampu_hijau_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="setelah_1m" class="block text-sm font-medium text-slate-300">c. Mengukur laju paparan radiasi pada jarak 1 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="setelah_1m" name="setelah_1m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                            <div>
+                                <label for="setelah_5m" class="block text-sm font-medium text-slate-300">d. Mengukur laju paparan radiasi pada jarak 5 meter (µSv/h)</label>
+                                <input type="number" step="0.01" id="setelah_5m" name="setelah_5m" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input mt-1" required>
+                            </div>
+                            <div>
+                                <p class="block text-sm font-medium text-slate-300 mb-2">e. Catat jarum akhir pendose pada log book</p>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="catat_akhir_pendose_sudah" name="catat_akhir_pendose" value="Sudah dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500" required>
+                                        <label for="catat_akhir_pendose_sudah" class="ml-2 block text-sm text-slate-300">Sudah dilakukan</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="catat_akhir_pendose_belum" name="catat_akhir_pendose" value="Belum dilakukan" type="radio" class="h-4 w-4 border-gray-300 text-lime-600 focus:ring-lime-500">
+                                        <label for="catat_akhir_pendose_belum" class="ml-2 block text-sm text-slate-300">Belum dilakukan</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="flex items-center justify-end space-x-4 pt-2">
+                        <p id="status-message-tg" class="text-sm"></p>
+                        <button id="submit-button-tg" type="submit" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg">
+                            Simpan Checklist
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page5" class="hidden">
+            <div class="card p-8 rounded-2xl max-w-lg mx-auto">
+                <h2 class="font-display text-3xl font-bold text-glow mb-6">PENCATATAN PERSONAL DOSIMETER</h2>
+                <form id="dosimeter-form" class="space-y-6">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label for="pd_tanggal" class="block text-sm font-medium text-slate-300 mb-2">Tanggal</label>
+                            <input type="date" id="pd_tanggal" name="pd_tanggal" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="pd_nama" class="block text-sm font-medium text-slate-300 mb-2">Nama</label>
+                            <input type="text" id="pd_nama" name="pd_nama" placeholder="Masukkan nama" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="pd_sebelum" class="block text-sm font-medium text-slate-300 mb-2">Sebelum Bekerja (mR)</label>
+                            <input type="number" step="0.01" id="pd_sebelum" name="pd_sebelum" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                        <div>
+                            <label for="pd_setelah" class="block text-sm font-medium text-slate-300 mb-2">Setelah Bekerja (mR)</label>
+                            <input type="number" step="0.01" id="pd_setelah" name="pd_setelah" placeholder="0.00" class="w-full p-2.5 rounded-lg form-input" required>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end space-x-4 pt-2">
+                        <p id="status-message-pd" class="text-sm"></p>
+                        <button id="submit-button-pd" type="submit" class="btn btn-primary font-semibold py-2.5 px-6 rounded-lg">
+                            Simpan Data Dosimeter
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center">
+                    <button onclick="showPage('page1')" class="btn btn-secondary font-semibold py-2 px-8 rounded-lg">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="config.js"></script>
     <script>
         const page1 = document.getElementById('page1');
         const pageLogin = document.getElementById('pageLogin');
+        const pageLoginTg = document.getElementById('pageLoginTg');
+        const pageLoginPd = document.getElementById('pageLoginPd');
         const page2 = document.getElementById('page2');
+        const page4 = document.getElementById('page4');
+        const page5 = document.getElementById('page5');
         
+        // Login Kr-85
         const loginForm = document.getElementById('login-form');
         const loginError = document.getElementById('login-error');
         const loginButton = document.getElementById('login-button');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
 
+        // Login Checklist TG
+        const loginFormTg = document.getElementById('login-form-tg');
+        const loginErrorTg = document.getElementById('login-error-tg');
+        const loginButtonTg = document.getElementById('login-button-tg');
+        const usernameInputTg = document.getElementById('username-tg');
+        const passwordInputTg = document.getElementById('password-tg');
+
+        // Login Personal Dosimeter
+        const loginFormPd = document.getElementById('login-form-pd');
+        const loginErrorPd = document.getElementById('login-error-pd');
+        const loginButtonPd = document.getElementById('login-button-pd');
+        const usernameInputPd = document.getElementById('username-pd');
+        const passwordInputPd = document.getElementById('password-pd');
+
         function validateLoginInput() {
             try {
                 const isMatch = usernameInput.value === USERNAME && passwordInput.value === PASSWORD;
                 loginButton.disabled = !isMatch;
-                if (isMatch) {
-                    loginButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                } else {
-                    loginButton.classList.add('opacity-50', 'cursor-not-allowed');
-                }
+                loginButton.classList.toggle('opacity-50', !isMatch);
+                loginButton.classList.toggle('cursor-not-allowed', !isMatch);
             } catch (e) {
-                // If config variables are not found, keep button disabled
                 loginButton.disabled = true;
                 loginButton.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function validateLoginInputTg() {
+            try {
+                const isMatch = usernameInputTg.value === USERNAME && passwordInputTg.value === PASSWORD;
+                loginButtonTg.disabled = !isMatch;
+                loginButtonTg.classList.toggle('opacity-50', !isMatch);
+                loginButtonTg.classList.toggle('cursor-not-allowed', !isMatch);
+            } catch (e) {
+                loginButtonTg.disabled = true;
+                loginButtonTg.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function validateLoginInputPd() {
+            try {
+                const isMatch = usernameInputPd.value === USERNAME && passwordInputPd.value === PASSWORD;
+                loginButtonPd.disabled = !isMatch;
+                loginButtonPd.classList.toggle('opacity-50', !isMatch);
+                loginButtonPd.classList.toggle('cursor-not-allowed', !isMatch);
+            } catch (e) {
+                loginButtonPd.disabled = true;
+                loginButtonPd.classList.add('opacity-50', 'cursor-not-allowed');
             }
         }
 
@@ -320,12 +644,32 @@
             passwordInput.addEventListener('input', validateLoginInput);
         }
 
+        if (usernameInputTg && passwordInputTg) {
+            usernameInputTg.addEventListener('input', validateLoginInputTg);
+            passwordInputTg.addEventListener('input', validateLoginInputTg);
+        }
+
+        if (usernameInputPd && passwordInputPd) {
+            usernameInputPd.addEventListener('input', validateLoginInputPd);
+            passwordInputPd.addEventListener('input', validateLoginInputPd);
+        }
+
         const radiationForm = document.getElementById('radiation-form');
         const tanggalInput = document.getElementById('tanggal');
         const submitButton = document.getElementById('submit-button');
         const statusMessage = document.getElementById('status-message');
 
-        const allPages = [page1, pageLogin, page2];
+        const thicknessGaugeForm = document.getElementById('thickness-gauge-form');
+        const submitButtonTg = document.getElementById('submit-button-tg');
+        const statusMessageTg = document.getElementById('status-message-tg');
+        const tgTanggalInput = document.getElementById('tg_tanggal');
+
+        const dosimeterForm = document.getElementById('dosimeter-form');
+        const submitButtonPd = document.getElementById('submit-button-pd');
+        const statusMessagePd = document.getElementById('status-message-pd');
+        const pdTanggalInput = document.getElementById('pd_tanggal');
+
+        const allPages = [page1, pageLogin, pageLoginTg, pageLoginPd, page2, page4, page5];
 
         function showPage(pageId) {
             allPages.forEach(page => {
@@ -340,42 +684,60 @@
             if (pageId === 'page2') {
                 tanggalInput.value = new Date().toISOString().split('T')[0];
             }
+            if (pageId === 'page4') {
+                tgTanggalInput.value = new Date().toISOString().split('T')[0];
+            }
+            if (pageId === 'page5') {
+                pdTanggalInput.value = new Date().toISOString().split('T')[0];
+            }
         }
 
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === USERNAME && password === PASSWORD) {
+            if (usernameInput.value === USERNAME && passwordInput.value === PASSWORD) {
                 showPage('page2');
                 loginError.textContent = '';
                 loginForm.reset();
-                validateLoginInput(); // Reset button state after login
+                validateLoginInput();
             } else {
                 loginError.textContent = 'Username atau password salah.';
             }
         });
 
+        loginFormTg.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (usernameInputTg.value === USERNAME && passwordInputTg.value === PASSWORD) {
+                showPage('page4');
+                loginErrorTg.textContent = '';
+                loginFormTg.reset();
+                validateLoginInputTg();
+            } else {
+                loginErrorTg.textContent = 'Username atau password salah.';
+            }
+        });
+
+        loginFormPd.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (usernameInputPd.value === USERNAME && passwordInputPd.value === PASSWORD) {
+                showPage('page5');
+                loginErrorPd.textContent = '';
+                loginFormPd.reset();
+                validateLoginInputPd();
+            } else {
+                loginErrorPd.textContent = 'Username atau password salah.';
+            }
+        });
+
         radiationForm.addEventListener('submit', function(event) {
             event.preventDefault();
-
-            if (SCRIPT_URL === 'PASTE_URL_ANDA_DI_SINI' || !SCRIPT_URL) {
+            if (typeof SCRIPT_URL === 'undefined' || !SCRIPT_URL || SCRIPT_URL === 'PASTE_URL_ANDA_DI_SINI') {
                 statusMessage.textContent = 'Error: URL Google Script belum diatur!';
                 statusMessage.className = 'text-sm text-red-400';
                 return;
             }
-
             submitButton.disabled = true;
             submitButton.textContent = 'Menyimpan...';
-            statusMessage.textContent = '';
-
-            const formData = new FormData(radiationForm);
-
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: formData
-            })
+            fetch(SCRIPT_URL, { method: 'POST', body: new FormData(radiationForm)})
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
@@ -383,19 +745,83 @@
                     statusMessage.className = 'text-sm text-lime-400';
                     radiationForm.reset();
                     tanggalInput.value = new Date().toISOString().split('T')[0];
-                } else {
-                    throw new Error(data.message || 'Terjadi kesalahan yang tidak diketahui.');
-                }
+                } else { throw new Error(data.message || 'Terjadi kesalahan.'); }
             })
             .catch(error => {
-                console.error('Error:', error);
                 statusMessage.textContent = 'Gagal menyimpan data. Cek konsol.';
                 statusMessage.className = 'text-sm text-red-400';
+                console.error('Error:', error);
             })
-            .finally(() => {
+            .finally(() => { 
                 submitButton.disabled = false;
                 submitButton.textContent = 'Simpan Data';
                 setTimeout(() => { statusMessage.textContent = ''; }, 3000);
+            });
+        });
+
+        thicknessGaugeForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (typeof SCRIPT_URL_TG === 'undefined' || !SCRIPT_URL_TG || SCRIPT_URL_TG === 'PASTE_URL_ANDA_DI_SINI') {
+                statusMessageTg.textContent = 'Error: URL Google Script untuk TG belum diatur!';
+                statusMessageTg.className = 'text-sm text-red-400';
+                return;
+            }
+            submitButtonTg.disabled = true;
+            submitButtonTg.textContent = 'Menyimpan...';
+            const formData = new FormData(thicknessGaugeForm);
+            formData.append('timestamp', new Date().toISOString());
+            fetch(SCRIPT_URL_TG, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    statusMessageTg.textContent = 'Data checklist berhasil disimpan!';
+                    statusMessageTg.className = 'text-sm text-lime-400';
+                    thicknessGaugeForm.reset();
+                    tgTanggalInput.value = new Date().toISOString().split('T')[0];
+                } else { throw new Error(data.message || 'Terjadi kesalahan.'); }
+            })
+            .catch(error => {
+                statusMessageTg.textContent = 'Gagal menyimpan data checklist. Cek konsol.';
+                statusMessageTg.className = 'text-sm text-red-400';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitButtonTg.disabled = false;
+                submitButtonTg.textContent = 'Simpan Checklist';
+                setTimeout(() => { statusMessageTg.textContent = ''; }, 3000);
+            });
+        });
+
+        dosimeterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (typeof SCRIPT_URL_PD === 'undefined' || !SCRIPT_URL_PD || SCRIPT_URL_PD === 'PASTE_URL_ANDA_DI_SINI') {
+                statusMessagePd.textContent = 'Error: URL Google Script untuk PD belum diatur!';
+                statusMessagePd.className = 'text-sm text-red-400';
+                return;
+            }
+            submitButtonPd.disabled = true;
+            submitButtonPd.textContent = 'Menyimpan...';
+            const formData = new FormData(dosimeterForm);
+            formData.append('timestamp', new Date().toISOString());
+            fetch(SCRIPT_URL_PD, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    statusMessagePd.textContent = 'Data dosimeter berhasil disimpan!';
+                    statusMessagePd.className = 'text-sm text-lime-400';
+                    dosimeterForm.reset();
+                    pdTanggalInput.value = new Date().toISOString().split('T')[0];
+                } else { throw new Error(data.message || 'Terjadi kesalahan.'); }
+            })
+            .catch(error => {
+                statusMessagePd.textContent = 'Gagal menyimpan data dosimeter. Cek konsol.';
+                statusMessagePd.className = 'text-sm text-red-400';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitButtonPd.disabled = false;
+                submitButtonPd.textContent = 'Simpan Data Dosimeter';
+                setTimeout(() => { statusMessagePd.textContent = ''; }, 3000);
             });
         });
     </script>
